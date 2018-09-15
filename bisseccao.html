@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bissecçao</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <script type="text/javascript" src="/javascripts/angular.min.js"></script>
+  <script type="text/javascript" src="funcionbisseccao.js"></script>
+  <script src="http://nerdamer.com/js/nerdamer.core.js"></script>
+  <script src="http://nerdamer.com/js/Algebra.js"></script>
+  <script src="http://nerdamer.com/js/Calculus.js"></script>
+  <script src="/javascripts/reviewscontroller.js"></script>
+</head>
+<body style="background-image: url(https://www.kampocesku.cz/jpg/galerie/velky/21647_Image00084.jpg);">
+<div class="header">
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+           <a class="navbar-brand" style="font-family: FreeMono;" href="index.html">Cálculo Numérico</a>
+          </div>
+          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li  style="font-family: FreeMono;"><a href="conversor.html">Máquina Binária</a></li>
+              <li style="font-family: FreeMono;"><a href="floats.html">Floats</a></li>
+               <li class="active" style="font-family: FreeMono;"><a href="bisseccao.html">Bissecção</a></li>
+               <li style="font-family: FreeMono;"><a href="newton.html">Newton</a></li>
+
+            </ul>
+          </div>
+        </div>  
+     
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="container">
+    <div class="jumbotron" style=" width: 350px; margin-left: 16%; background-color:  #DCDCDC;">
+        <form class="form-group" name="formulario" onsubmit="return bissecao(this);" style="width: 240px; margin-left: -7px; margin-top: 10px;">
+
+        <label for="usr" style="font-family: FreeMono; margin-top: -20px;">Coloque o primeiro valor do intervalo:</label>
+            <input type="text" placeholder="(Ex: 10)" name="a" size="4" class="form-control" style="margin-bottom: 10px;">
+
+        <label for="usr" style="font-family: FreeMono;">Coloque o segundo valor do intervalo:</label>
+            <input type="text" placeholder="(Ex: 10)" name="b" size="4" class="form-control" style="margin-bottom: 10px;">
+
+        <label for="usr" style="font-family: FreeMono;">Coloque a tolerância:</label>
+            <input type="text" placeholder="(Ex: 10)" name="tol" size="4" class="form-control" style="margin-bottom: 10px;">
+
+
+        <label for="usr" style="font-family: FreeMono; margin-top: 10px;">Coloque sua função:</label>
+            <input name="func" type="text" size="15" placeholder="(Ex: x^2 + 1)" class="form-control" style="margin-bottom: 10px;"/>
+
+        <input type="submit" class="btn container" value="Converter" style="margin-top: 30px; background-color: #80aaff; font-family: FreeMono; color: white" >
+      </form>
+
+  </div>
+</div>
+
+
+<div class="row">
+    <div class="container">
+    <div class="jumbotron" style=" width: 350px; margin-left: 50%; margin-top: -520px; height: 490px; background-color: #C0C0C0; position: relative;">
+    <img src="https://image.flaticon.com/icons/png/512/57/57108.png" style="width: 40px; margin-bottom: 50px; margin-left: 37%;">
+    <p style="font-size: 14.7px; text-indent: 20px; text-align: justify; margin: -10px;"> 
+O método da bisseção é um método de busca de raízes que bissecta repetidamente um intervalo e então seleciona um subintervalo contendo a raiz para processamento adicional. Trata-se de um método simples e robusto, relativamente lento quando comparado a métodos como o método de Newton ou o método das secantes. Por este motivo, ele é usado frequentemente para obter uma primeira aproximação de uma solução, a qual é então utilizada como ponto inicial para métodos que convergem mais rapidamente.</p>
+
+  </div>  
+</div>  
+
+<div class="row">
+    <div class="container">
+    <div class="jumbotron" style="margin-top: -10px; position: absolute; width: 735px; margin-left: 180px; height: 400px; background-color: #DCDCDC;">
+
+    <div class="container">
+        <table class="table table-striped" style="margin-top: 15px">
+          <thead>
+            <tr>
+              <th class="col-md-6" >F<sub>(x)</th>
+              <th class="col-md-6" style="position: absolute; margin-left: -70px;">Valor médio</th>
+              <th class="col-md-6" style="position: absolute; margin-left: 180px;">Intervalo</th>
+            </tr>
+          </thead> 
+        </table>
+    </div>
+    <div class="container" style="width:600px; height:200px; overflow:auto;">
+        <table class="table table-striped" id="tabela-numValores">
+            <tr></tr>
+        </table>
+    </div>
+    </div>  
+  </div>  
+</div>  
+      
+</div> 
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Maquina Binária</title>
+	 <meta charset="utf-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+  	
+  	function convert() {
+   		partereal = parseInt(document.getElementById("partereal").value);
+   		partefloat = parseFloat(document.getElementById("partefloat").value);
+
+   		total = partereal + partefloat;
+
+   		var binario = total.toString(2);
+
+
+   		document.getElementById('resultado').value = binario;
+   	}
+
+  </script>
+</head>
+<body style="background-image: url(https://www.kampocesku.cz/jpg/galerie/velky/21647_Image00084.jpg);">
+<div class="header">
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+           <a class="navbar-brand" style="font-family: FreeMono;" href="index.html">Cálculo Numérico</a>
+          </div>
+          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active" style="font-family: FreeMono;"><a href="conversor.html">Máquina Binária</a></li>
+              <li style="font-family: FreeMono;"><a href="floats.html">Floats</a></li>
+               <li style="font-family: FreeMono;"><a href="bisseccao.html">Bissecção</a></li>
+               <li style="font-family: FreeMono;"><a href="newton.html">Newton</a></li>
+
+            </ul>
+          </div>
+        </div>  
+     
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="row">
+    <div class="container">
+		<div class="jumbotron" style="width: 300px; margin-left: 18%; background-color:  #DCDCDC;">
+			<div class="form-group" style="width: 240px;  margin-left: -30px;">
+			  <label for="usr" style="font-family: FreeMono; margin-top: -20px;">Valores a serem convertidos:</label>
+			  <input type="number" placeholder="Parte Real (Ex: 5)" id="partereal" class="form-control" style="margin-bottom: 10px;">
+			  <input type="number" placeholder="Parte Decimal (Ex: 0.75)" id="partefloat" class="form-control">
+			  <button type="button" class="btn container" style="margin-top: 30px; background-color: #80aaff;" onclick="convert()"><div style="font-family: FreeMono; color: white;"> Converter </div></button>
+			</div>
+	</div>  
+</div>  
+
+<div class="row">
+    <div class="container">
+		<div class="jumbotron" style="margin-top: -10px; position: relative; width: 300px; height: 180px; margin-left: 18%; background-color:  #DCDCDC;">
+		<label for="usr" style="font-family: FreeMono;">Resultado:</label>
+		<input id="resultado" class="form-control" type="text" style="margin-top: 0px;"> </div>
+		</div>	
+	</div>  
+</div>  
+
+<div class="row">
+    <div class="container">
+    <div class="jumbotron" style="margin-top: -10px; position: relative; width: 300px; height: 480px;  margin-left: 48%; background-color: #C0C0C0; margin-top: -505px;">
+    <img src="https://image.flaticon.com/icons/png/512/57/57108.png" style="width: 40px; margin-bottom: 50px; margin-left: 37%;">
+    <p style="font-size: 13px; text-indent: 20px; text-align: justify; margin: -10px;"> O sistema de numeração decimal (base dez) possui dez possíveis valores (0, 1, 2, 3, 4, 5, 6, 7, 8 ou 9) para cada casa numérica. Por outro lado, o sistema de numeração binária (base dois) possui apenas dois valores, representados por 0 e 1, para cada casa numérica. Já que o sistema binário é a linguagem interna dos computadores eletrônicos, programadores profissionais devem saber como converter de decimal para binário. Siga estes passos simples para dominar esta conversão.</p>
+  </div> 
+    </div>  
+  </div>  
+</div>  
+
+
+
+</body>
+</html>

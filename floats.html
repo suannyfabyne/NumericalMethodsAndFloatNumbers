@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Floats</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- jquery -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  <script>
+
+    function tableRefresh(numValores,cardinalidade){ 
+      var table = document.getElementById('tabela-numValores');
+      var row;
+      table.innerHTML="<tr></tr><tr></tr>";
+       for (var i =  0; i < cardinalidade; i++) {
+          row = table.insertRow(i+1);
+          row.innerHTML = "<td>"+   i   +"</td> <td>"+numValores[i] +"</td>"; 
+      }
+    }
+
+
+    function convert() {
+      base = parseInt(document.getElementById("base").value);
+      ndigitos = parseInt(document.getElementById("ndigitos").value);
+      limInf = parseInt(document.getElementById("limInf").value);
+      limSup = parseInt(document.getElementById("limSup").value);
+
+      var cardinalidade = parseInt(2*(base-1)*(Math.pow(base,ndigitos-1))*(limSup - limInf + 1) +1);
+
+      var resultado = cardinalidade.toString();
+      document.getElementById('resultado').value = resultado;
+
+      var numValores = new Array(cardinalidade-1);
+      var valoresGra = new Array(cardinalidade-1);
+      var zeros = new Array(cardinalidade-1);
+      var aux = 0;
+
+      var istr;
+      var jstr;
+      var kstr;
+      var zstr;
+
+      if(ndigitos == 1){
+  		  for(i = limInf; i <= limSup; i++)
+        {           
+  		    istr = i.toString();
+
+  		    for(j= 1; j < base; j++)
+  		    {		          
+  	            aux++;
+  	            jstr = j.toString();
+  	            numValores[((cardinalidade)/2)-aux-0.5]= "-0." + jstr + " x 10^" + istr;
+                valoresGra[((cardinalidade)/2)-aux-0.5] = -j*0.1*Math.pow(10,i); //-1 * 10^-1  0,1
+  	            numValores[((cardinalidade)/2)+aux-0.5] = "0." + jstr + " x 10^" + istr;
+                valoresGra[((cardinalidade)/2)+aux-0.5] = j*0.1*Math.pow(10,i);    
+  			 }
+  		}
+  	 }
+
+      if(ndigitos == 2)
+      {
+          for(i = limInf; i <= limSup; i++)
+          {           
+              istr = i.toString();
+
+              for(j= 1; j < base; j++)
+              {
+                  jstr = j.toString();
+
+                  for(k=0 ; k < base; k++)
+                  {                  
+                      aux++;
+                      kstr = k.toString();
+                      numValores[((cardinalidade)/2)-aux-0.5]= "-0." + jstr + kstr + " x 10^" + istr;
+                      valoresGra[((cardinalidade)/2)-aux-0.5] = -(j*0.1 + k*0.01)*Math.pow(10,i); 
+                      numValores[((cardinalidade)/2)+aux-0.5] = "0." + jstr + kstr + " x 10^" + istr;
+                      valoresGra[((cardinalidade)/2)+aux-0.5] = (j*0.1 + k*0.01)*Math.pow(10,i);
+                  }
+              }
+          }
+      }
+      
+      if(ndigitos == 3)
+      {
+        for(i = limInf; i <= limSup; i++)
+        {           
+            istr = i.toString();
+
+            for(j= 1; j < base; j++)
+            {
+                jstr = j.toString();
+
+                for(k=0 ; k < base; k++)
+                {
+                    kstr = k.toString();
+
+                    for(z=0; z < base; z++)
+                    {
+                        aux++;
+                        zstr = z.toString();
+                        numValores[((cardinalidade)/2)-aux-0.5]= "-0." + jstr + kstr + zstr + " x 10^" + istr;
+                        valoresGra[((cardinalidade)/2)-aux-0.5] = -(j*0.1 + k*0.01 + z*0.001)*Math.pow(10,i);
+                        numValores[((cardinalidade)/2)+aux-0.5] = "0." + jstr + kstr + zstr + " x 10^" + istr;
+                        valoresGra[((cardinalidade)/2)+aux-0.5] = (j*0.1 + k*0.01 + z*0.001)*Math.pow(10,i);
+                    }
+                }
+            }
+        }
+      }
+      numValores[((cardinalidade)/2)-0.5]= "0";
+
+      tableRefresh(numValores, cardinalidade);
+      /* JAVASCRIPT CODE GOES HERE */
+
+      for (var i = 0; i < cardinalidade; i++) {
+        zeros[i]=0;
+      }
+    var data = [
+    {
+      x: valoresGra,
+      y: zeros,
+      text: numValores,
+      mode: 'markers',
+      type: 'scatter'
+    }
+    ];
+    var layout = {
+      autosize: false,
+      width: 500,
+      height: 250,
+      margin: {
+        l: 50,
+        r: 50,
+        b: 30,
+        t: 30,
+        pad: 4
+      },
+      paper_bgcolor: '#DCDCDC',
+      plot_bgcolor: 'white'
+    };
+    Plotly.newPlot('myDiv', data, layout);
+
+    }
+  </script>
+</head>
+<body style="background-image: url(https://www.kampocesku.cz/jpg/galerie/velky/21647_Image00084.jpg); ">
+      <div class="header">
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+           <a class="navbar-brand" style="font-family: FreeMono;" href="index.html">Cálculo Numérico</a>
+          </div>
+          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li  style="font-family: FreeMono;"><a href="conversor.html">Máquina Binária</a></li>
+              <li  class="active" style="font-family: FreeMono;"><a href="floats.html">Floats</a></li>
+               <li style="font-family: FreeMono;"><a href="bisseccao.html">Bissecção</a></li>
+               <li style="font-family: FreeMono;"><a href="newton.html">Newton</a></li>
+
+            </ul>
+          </div>
+        </div>  
+     
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="row">
+    <div class="container">
+    <div class="jumbotron" style=" width: 350px; margin-left: 8%; background-color:  #DCDCDC;">
+      <div class="form-group" style="width: 240px; margin-left: -7px;">
+        <label for="usr" style="font-family: FreeMono; margin-top: -20px; ">Valores a serem convertidos:</label>
+        <input type="number" placeholder="Base (Ex: 10)" id="base" class="form-control" style="margin-bottom: 10px;">
+        
+        <input type="text" maxlength="1" onkeypress='return event.charCode >= 49 && event.charCode <= 51' placeholder="Número de digitos de 1 a 3" id="ndigitos" class="form-control" style="margin-bottom: 10px;">
+        <input type="number" placeholder="Limitante inferior (Ex: -1)" id="limInf" class="form-control" style="margin-bottom: 10px;">
+        <input type="number" placeholder="Limitante superior (Ex: 1)" id="limSup" class="form-control" style="margin-bottom: 10px;">
+        <button type="button" class="btn container" style="margin-top: 30px; background-color: #80aaff;" onclick="convert()" ><div style="font-family: FreeMono; color: white;"> Converter </div></button>
+      </div>
+  </div>  
+</div>  
+
+<div class="row">
+    <div class="container">
+    <div class="jumbotron" style=" width: 350px; margin-left: 8%; background-color: #C0C0C0; height: 380px; ">
+    <img src="https://image.flaticon.com/icons/png/512/57/57108.png" style="width: 40px; margin-bottom: 30px; margin-left: 37%;">
+    <p style="font-size: 13px; text-indent: 20px; text-align: justify; margin: -10px;"> A utilização da notação de ponto flutuante é muito grande em computadores, tanto para cálculos matemáticos com precisão, renderização de imagens digitais (criação de imagens pelo computador) entre outros. Os processadores atuais se dedicam muito em aperfeiçoar a técnica de seus chips para a aritmética de ponto flutuante, devido à demanda de aplicativos gráficos e jogos 3D que se utilizam muito deste recurso. </p>
+  </div>  
+</div>
+
+<div class="row">
+    <div class="container">
+    <div class="jumbotron" style="margin-left: 480px; margin-top: -815px; width: 600px; height:375px; background-color: #DCDCDC; position: relative;">
+    <label for="usr" style="font-family: FreeMono; color:black;">Cardinalidade:</label>
+    <input id="resultado" class="form-control" type="text" disabled="disabled" style="margin-top: 0px;">
+
+    <div class="container">
+        <table class="table table-striped" style="margin-bottom: -3px">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Valor</th>
+            </tr>
+          </thead>  
+        </table>
+    </div>
+    <div class="container" style="width:600px; height:200px; overflow:auto;">
+        <table class="table table-striped" id="tabela-numValores">
+            <tr></tr>
+        </table>
+    </div>
+      
+    </div>  
+  </div>  
+</div>  
+<div class="row">
+    <div class="container">
+    <div class="jumbotron" style="margin-top: -407px; margin-left: 480px; width: 600px; height:375px; background-color:  #DCDCDC; position: relative;">
+<!-- Plotly chart will be drawn inside this DIV -->
+        <label for="usr" style="font-family: FreeMono;">Gráfico:</label>
+        <div id="myDiv" style="width: 100%; height: 500px; margin-top: 20px;"></div>
+
+
+    </div>  
+  </div>  
+</div> 
+</body>
+
+</html>
